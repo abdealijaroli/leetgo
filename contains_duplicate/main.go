@@ -1,7 +1,9 @@
-package contains_duplicate
+package main
+
+import "fmt"
 
 func containsDuplicate(nums []int) bool {
-    set := map[int]struct{}{}
+	set := map[int]struct{}{}
 
 	for _, n := range nums {
 		if _, ok := set[n]; ok {
@@ -9,6 +11,10 @@ func containsDuplicate(nums []int) bool {
 		}
 		set[n] = struct{}{}
 	}
-    
-	return false  
+
+	return false
+}
+
+func main() {
+	fmt.Println(containsDuplicate([]int{1, 2, 3, 1}))
 }

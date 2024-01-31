@@ -1,3 +1,3 @@
-module leetgo/contains_duplicate
+module leetgo
 
 go 1.21.5
