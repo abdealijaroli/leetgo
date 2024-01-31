@@ -22,6 +22,27 @@ func isAnagram(s string, t string) bool {
 	return true
 }
 
+func altIsAnagram(s string, t string) bool {
+    if len(s) != len(t) {
+        return false
+    }
+    
+    m := map[rune]int{}
+
+    for _, char := range s {
+        m[char]++
+    }
+
+    for _, char := range t {
+        if _, c := m[char]; !c || m[char] == 0 {
+            return false
+        }
+        m[char]--
+    }
+    return true
+}
+
 func main() {
 	fmt.Println(isAnagram("anagram", "nagaram"))
+	fmt.Println(altIsAnagram("anagram", "nagaram"))
 }
