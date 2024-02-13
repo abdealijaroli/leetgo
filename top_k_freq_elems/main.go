@@ -2,28 +2,33 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func topKFrequent(nums []int, k int) []int {
-	m := make(map[int]int)
+	countMap := map[int]int{}
 
-	for _, key := range nums {
-		m[key]++
+	for _, num := range nums {
+		countMap[num]++
 	}
 
-	keys := make([]int, 0, len(m))
-	for key := range m {
-		keys = append(keys, key)
+	countSlice := make([][]int, len(nums)+1)
+
+	for num, count := range countMap {
+		countSlice[count] = append(countSlice[count], num)
 	}
 
-	sort.Slice(keys, func(i, j int) bool {
-		return m[keys[i]] > m[keys[j]]
-	})
+	res := make([]int, 0, k)
 
-	return keys[:k]
+	for i := len(countSlice) - 1; i > 0; i-- {
+		res = append(res, countSlice[i]...)
+		if len(res) == k {
+			break
+		}
+	}
+
+	return res
 }
 
 func main() {
-	fmt.Println(topKFrequent([]int{1, 1, 1, 2, 2, 3}, 2))
+	fmt.Println(topKFrequent([]int{-1, -1}, 1))
 }
