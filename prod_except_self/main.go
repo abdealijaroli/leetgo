@@ -4,6 +4,25 @@ import (
 	"fmt"
 )
 
+// optimal solution
+func productExceptSelfOptimal(nums []int) []int {
+	n := len(nums)
+	res := make([]int, n)
+
+	res[0] = 1 
+	for i := 1; i < n; i++ {
+		res[i] = res[i-1] * nums[i-1]
+	}
+
+	R := 1
+	for i := n-1; i >=0 ; i-- {
+		res[i] = res[i] * R
+		R = R * nums[i]
+	}
+
+	return res
+}
+
 // initial solution
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
@@ -36,4 +55,5 @@ func productExceptSelf(nums []int) []int {
 func main() {
 	nums := []int{1, 2, 3, 4}
 	fmt.Println(productExceptSelf(nums))
+	fmt.Println(productExceptSelfOptimal(nums))
 }
